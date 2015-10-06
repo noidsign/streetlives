@@ -341,6 +341,25 @@ __p += '\n\n  </ul>\n  <button class="Button Button--close js-cancel">✕</butto
 return __p
 };
 
+this["JST"]["sources/templates/popup.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<p>\n  <strong class="Popup-addressName">';
+ if (name) { ;
+__p +=
+__e(name ) +
+', ';
+ } ;
+__p +=
+__e( address ) +
+'</strong> is not part of Streetlives yet.\n</p>\n\n<button class="Button Button--addLocationSmall js-add-location">Add location</button>\n';
+
+}
+return __p
+};
+
 this["JST"]["sources/templates/search.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -860,7 +879,8 @@ var MapView = SL.View.extend({
   },
 
   events: {
-    'click .js-add-location': '_onClickAddLocation'
+    'click .js-add-location': '_onClickAddLocation',
+    'keyup': '_onKeyUp'
   },
 
   initialize: function() {
@@ -972,6 +992,12 @@ var MapView = SL.View.extend({
     }, 250);
   },
 
+  _onKeyUp: function(e) {
+    if (e.keyCode === 27) {
+      this.map.closePopup();
+    }
+  },
+
   _onClickAddLocation: function(e) {
     this._killEvent(e);
     this.addLocation.hide();
@@ -1034,16 +1060,16 @@ var MapView = SL.View.extend({
   _addMarker: function(coordinates) {
     var style = this.defaults.style.marker;
 
-    var self = this;
+    var template = this._getTemplate('popup');
 
-    var contentTemplate = _.template('<p><strong class="Popup-addressName"><% if (name) { %><%-name %>, <% } %><%- address %></strong> is not part of Streetlives yet.</p><button class="Button Button--addLocationSmall js-add-location">Add location</button>');
-
-    var content = contentTemplate({ name: this.model.get('name'), address: this.model.get('address' )});
+    var content = template({ name: this.model.get('name'), address: this.model.get('address' )});
 
     this.popup = SL.Popup({ autoPanPaddingTopLeft: [10, 75], offset: [0, -5]})
     .setLatLng(coordinates)
     .setContent(content)
     .openOn(this.map);
+
+    var self = this;
 
     this.popup.on('close', function() {
       self.map.removeLayer(self.currentMarker);
@@ -1052,7 +1078,6 @@ var MapView = SL.View.extend({
     this.currentMarker = L.circleMarker(coordinates, style);
     this.currentMarker.addTo(this.map);
     this.addLocation.show();
-    //this._removeCurrentSelection();
   },
 
   _getVizJSONURL: function() {

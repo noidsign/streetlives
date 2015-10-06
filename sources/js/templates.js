@@ -103,6 +103,25 @@ __p += '\n\n  </ul>\n  <button class="Button Button--close js-cancel">✕</butto
 return __p
 };
 
+this["JST"]["sources/templates/popup.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<p>\n  <strong class="Popup-addressName">';
+ if (name) { ;
+__p +=
+__e(name ) +
+', ';
+ } ;
+__p +=
+__e( address ) +
+'</strong> is not part of Streetlives yet.\n</p>\n\n<button class="Button Button--addLocationSmall js-add-location">Add location</button>\n';
+
+}
+return __p
+};
+
 this["JST"]["sources/templates/search.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
