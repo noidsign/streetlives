@@ -18,12 +18,12 @@ $padding: 20px;
 
 .LocationForm {
   $width: 500px;
-  $height: 500px;
+  $height: 550px;
   position: absolute;
   box-sizing: border-box;
   background: #fff;
   width: $width;
-  /*height: $height;*/
+  height: $height;
   margin-left: -$width/2;
   margin-top: -$height/2;
   top: 50%;

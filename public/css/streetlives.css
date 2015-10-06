@@ -450,9 +450,9 @@ body {
   box-sizing: border-box;
   background: #fff;
   width: 500px;
-  /*height: $height;*/
+  height: 550px;
   margin-left: -250px;
-  margin-top: -250px;
+  margin-top: -275px;
   top: 50%;
   left: 50%;
   z-index: 10;
