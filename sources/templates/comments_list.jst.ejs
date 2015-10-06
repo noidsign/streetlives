@@ -1,0 +1,10 @@
+<ul class="CommentList scroll-pane">
+  <% comments.each(function(comment) { %>
+  <li class="CommentList-item">
+    <p>
+      <%- comment.get('comment') %>
+    </p>
+  </li>
+  <% }); %>
+</ul>
+

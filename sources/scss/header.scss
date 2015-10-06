@@ -1,0 +1,45 @@
+.Header {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  flex-flow: space-around;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  width: 100%;
+  padding: 20px;
+  background: #333333;
+  color: #FFFFFF;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
+}
+.HeaderTitle {
+  flex: 1;
+  color: #FFFFFF;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.HeaderItems {
+  flex: 1;
+  text-align: right;
+}
+.HeaderItem {
+  display: inline-block;
+  color: #FFFFFF;
+}
+.HeaderItem-link {
+  border: none;
+  outline: none;
+  background: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+.HeaderItem-link.is-selected {
+  color: #2ECC71;
+}

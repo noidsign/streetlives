@@ -1,0 +1,60 @@
+.LocationInformation {
+  font-family: 'Lato', sans-serif; }
+
+.LocationInformation-title {
+  border-bottom: 1px solid #ccc;
+  margin: 0px 20px 20px;
+  padding: 0 0px 10px 0; }
+
+.LocationInformation-name {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 5px 0; }
+
+.LocationInformation-address {
+  display: block;
+  color: #ccc;
+  font-weight: normal;
+  font-size: 14px; }
+
+.LocationInformation-fields {
+  font-family: 'Lato', sans-serif; }
+
+.LocationInformation-field {
+  padding: 0 20px;
+  margin: 0 0 20px 0; }
+
+.LocationInformation-label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  font-size: 15px; }
+
+.LocationInformation .Button--close {
+  top: -32px; }
+
+.LocationInformation {
+  padding: 20px 0 0 0;
+  position: absolute;
+  box-sizing: border-box;
+  background: #fff;
+  width: 700px;
+  margin-left: -350px;
+  margin-top: -225px;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 2px; }
+
+.LocationInformation-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; }
+
+.LocationInformation.is-hidden {
+  display: none; }
+
+/*# sourceMappingURL=location_information.css.map */

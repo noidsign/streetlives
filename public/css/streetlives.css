@@ -1,0 +1,684 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.Header {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  flex-flow: space-around;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  width: 100%;
+  padding: 20px;
+  background: #333333;
+  color: #FFFFFF;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box; }
+
+.HeaderTitle {
+  flex: 1;
+  color: #FFFFFF;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase; }
+
+.HeaderItems {
+  flex: 1;
+  text-align: right; }
+
+.HeaderItem {
+  display: inline-block;
+  color: #FFFFFF; }
+
+.HeaderItem-link {
+  border: none;
+  outline: none;
+  background: none;
+  color: #FFFFFF;
+  font-size: 16px; }
+  .HeaderItem-link:hover {
+    text-decoration: underline;
+    cursor: pointer; }
+
+.HeaderItem-link.is-selected {
+  color: #2ECC71; }
+
+.SearchField {
+  position: absolute;
+  width: 500px;
+  height: 40px;
+  top: 80px;
+  left: 55px;
+  z-index: 10; }
+
+.SearchInput {
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 0 50px 0 13px;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis; }
+  .SearchInput:focus {
+    border: 1px solid transparent; }
+  .SearchInput:hover {
+    border: 1px solid transparent; }
+
+html,
+body,
+.Map {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: #FFFFFF;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #222326;
+  background-color: #f8f8f8;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; }
+
+/*# sourceMappingURL=app.css.map */
+
+.Button {
+  padding: 10px 16px;
+  border: none;
+  background: #2ECC71;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #FFFFFF;
+  box-shadow: 0px 3px 0px rgba(33, 128, 72, 0.9);
+  cursor: pointer;
+  z-index: 10;
+  outline: none; }
+  .Button:hover {
+    background: #27AF61; }
+
+.Button--addLocation {
+  position: absolute;
+  top: 80px;
+  right: 20px; }
+
+.Button--close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: #fff;
+  z-index: 10;
+  color: #333;
+  box-shadow: none;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  font-size: 10px;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle; }
+  .Button--close:hover {
+    background: #f1f1f1; }
+
+.Button.is-hidden {
+  display: none; }
+
+/*# sourceMappingURL=button.css.map */
+
+.Comments {
+  background: #F1F1F1;
+  border-top: 1px solid #DDD;
+  padding: 20px; }
+
+.CommentList {
+  margin: 0 10px 20px 0; }
+
+.CommentList-item {
+  margin: 0 10px 10px 0;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #DDD; }
+  .CommentList-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: none; }
+
+.Comments-inner {
+  display: flex; }
+
+.Comments-form {
+  flex: 1; }
+
+.Comments-form .InputField-area {
+  margin: 0 0 20px 0; }
+
+.Comments-form .InputArea {
+  height: 200px; }
+
+.Comments-content {
+  flex: 1;
+  padding: 0 20px 0 0; }
+
+.scroll-pane {
+  width: 100%;
+  height: 200px;
+  overflow: auto; }
+
+/*# sourceMappingURL=comment.css.map */
+
+.Header {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  flex-flow: space-around;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  width: 100%;
+  padding: 20px;
+  background: #333333;
+  color: #FFFFFF;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box; }
+
+.HeaderTitle {
+  flex: 1;
+  color: #FFFFFF;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase; }
+
+.HeaderItems {
+  flex: 1;
+  text-align: right; }
+
+.HeaderItem {
+  display: inline-block;
+  color: #FFFFFF; }
+
+.HeaderItem-link {
+  border: none;
+  outline: none;
+  background: none;
+  color: #FFFFFF;
+  font-size: 16px; }
+  .HeaderItem-link:hover {
+    text-decoration: underline;
+    cursor: pointer; }
+
+.HeaderItem-link.is-selected {
+  color: #2ECC71; }
+
+/*# sourceMappingURL=header.css.map */
+
+.InputField {
+  font-family: 'Lato', sans-serif;
+  width: 100%; }
+
+.Input {
+  width: 100%;
+  height: 100%;
+  padding: 10px 7px;
+  background-color: #FFF;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  outline: none;
+  border: 1px solid #CCC;
+  border-radius: 2px; }
+  .Input:hover {
+    border-color: #AAA; }
+  .Input:focus {
+    border-color: #2ECC71; }
+
+.InputArea {
+  height: 100px; }
+
+.InputField.has-error .Input {
+  border-color: red; }
+
+.InputCheck {
+  cursor: pointer; }
+
+.InputCheck-label {
+  cursor: pointer; }
+
+/*# sourceMappingURL=input_field.css.map */
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+.jspContainer {
+  overflow: hidden;
+  position: relative; }
+
+.jspPane {
+  position: absolute; }
+
+.jspVerticalBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%; }
+
+.jspHorizontalBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px; }
+
+.jspCap {
+  display: none; }
+
+.jspHorizontalBar .jspCap {
+  float: left; }
+
+.jspTrack {
+  background: #DDD;
+  position: relative;
+  border-radius: 20px; }
+
+.jspDrag {
+  background: #AAA;
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  border-radius: 20px; }
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag {
+  float: left;
+  height: 100%; }
+
+.jspArrow {
+  background: #50506d;
+  text-indent: -20000px;
+  display: block;
+  cursor: pointer;
+  padding: 0;
+  margin: 0; }
+
+.jspArrow.jspDisabled {
+  cursor: default;
+  background: #80808d; }
+
+.jspVerticalBar .jspArrow {
+  height: 16px; }
+
+.jspHorizontalBar .jspArrow {
+  width: 10px;
+  float: left;
+  height: 100%; }
+
+.jspVerticalBar .jspArrow:focus {
+  outline: none; }
+
+.jspCorner {
+  background: #eeeef4;
+  float: left;
+  height: 100%; }
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner {
+  margin: 0 -3px 0 0; }
+
+/*# sourceMappingURL=jquery.css.map */
+
+.LocationForm-fields {
+  font-family: 'Lato', sans-serif; }
+
+.LocationForm-field {
+  margin: 0 0 20px 0; }
+
+.LocationForm-label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ccc; }
+
+.LocationForm {
+  position: absolute;
+  box-sizing: border-box;
+  background: #fff;
+  width: 500px;
+  height: 400px;
+  margin-left: -250px;
+  margin-top: -200px;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 2px; }
+
+.LocationForm-inner {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; }
+
+.LocationForm.is-hidden {
+  display: none; }
+
+.LocationForm .Footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%; }
+
+/*# sourceMappingURL=location.css.map */
+
+.LocationForm-fields {
+  font-family: 'Lato', sans-serif; }
+
+.LocationForm-field {
+  margin: 0 0 20px 0; }
+
+.LocationForm-label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ccc; }
+
+.LocationForm {
+  position: absolute;
+  box-sizing: border-box;
+  background: #fff;
+  width: 500px;
+  /*height: $height;*/
+  margin-left: -250px;
+  margin-top: -250px;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 2px; }
+
+.LocationForm-inner {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; }
+
+.LocationForm.is-hidden {
+  display: none; }
+
+.LocationForm .Footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%; }
+
+/*# sourceMappingURL=location_form.css.map */
+
+.LocationInformation {
+  font-family: 'Lato', sans-serif; }
+
+.LocationInformation-title {
+  border-bottom: 1px solid #ccc;
+  margin: 0px 20px 20px;
+  padding: 0 0px 10px 0; }
+
+.LocationInformation-name {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 5px 0; }
+
+.LocationInformation-address {
+  display: block;
+  color: #ccc;
+  font-weight: normal;
+  font-size: 14px; }
+
+.LocationInformation-fields {
+  font-family: 'Lato', sans-serif; }
+
+.LocationInformation-field {
+  padding: 0 20px;
+  margin: 0 0 20px 0; }
+
+.LocationInformation-label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  font-size: 15px; }
+
+.LocationInformation .Button--close {
+  top: -32px; }
+
+.LocationInformation {
+  padding: 20px 0 0 0;
+  position: absolute;
+  box-sizing: border-box;
+  background: #fff;
+  width: 700px;
+  margin-left: -350px;
+  margin-top: -225px;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 2px; }
+
+.LocationInformation-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; }
+
+.LocationInformation.is-hidden {
+  display: none; }
+
+/*# sourceMappingURL=location_information.css.map */
+
+.Map {
+  position: absolute;
+  width: 100%; }
+
+.Map .cartodb-tiles-loader {
+  position: absolute;
+  left: auto;
+  top: 80px;
+  left: 530px; }
+
+.Map .cartodb-tiles-loader .loader {
+  margin: 0;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 36px;
+  height: 36px; }
+
+.Map .cartodb-zoom {
+  margin: 0;
+  left: 20px;
+  top: 80px;
+  border: 1px solid transparent;
+  width: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+
+.Map .cartodb-zoom > a {
+  height: 18px;
+  width: 25px; }
+  .Map .cartodb-zoom > a.zoom_in {
+    background-position: -69px 5px; }
+    .Map .cartodb-zoom > a.zoom_in:hover {
+      background-position: -69px 6px; }
+  .Map .cartodb-zoom > a.zoom_out {
+    background-position: -96px 5px; }
+    .Map .cartodb-zoom > a.zoom_out:hover {
+      background-position: -96px 6px; }
+
+/*# sourceMappingURL=map.css.map */
+
+.Popup .leaflet-popup-content-wrapper {
+  text-align: center;
+  background: #FFF;
+  color: #333;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 2px;
+  padding: 10px;
+  position: relative; }
+
+.Popup .leaflet-popup-content-wrapper a {
+  color: rgba(255, 255, 255, 0.5); }
+
+.Popup .leaflet-popup-tip-container {
+  width: 30px;
+  height: 15px; }
+
+.Popup .leaflet-popup-tip-container .leaflet-popup-tip {
+  background: #FFF;
+  margin: -15px auto 0; }
+
+.Popup a.leaflet-popup-close-button {
+  color: #333;
+  z-index: 10;
+  font-weight: normal; }
+
+.Popup-addressName {
+  font-weight: bold; }
+
+/*# sourceMappingURL=popup.css.map */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*# sourceMappingURL=reset.css.map */
+
+.SearchField {
+  position: absolute;
+  width: 500px;
+  height: 40px;
+  top: 80px;
+  left: 55px;
+  z-index: 10; }
+
+.SearchInput {
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 0 50px 0 13px;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis; }
+  .SearchInput:focus {
+    border: 1px solid transparent; }
+  .SearchInput:hover {
+    border: 1px solid transparent; }
+
+/*# sourceMappingURL=search.css.map */
