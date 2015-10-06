@@ -143,7 +143,8 @@ body {
   z-index: 10;
   outline: none; }
   .Button:hover {
-    background: #27AF61; }
+    background: #27AF61;
+    border: 1px solid black; }
 
 .Button--addLocation {
   position: absolute;
