@@ -548,8 +548,8 @@ body {
 .Map .cartodb-tiles-loader {
   position: absolute;
   left: auto;
-  top: 80px;
-  left: 530px; }
+  top: 81px;
+  left: 565px; }
 
 .Map .cartodb-tiles-loader .loader {
   margin: 0;
