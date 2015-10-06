@@ -116,7 +116,7 @@ __e(name ) +
  } ;
 __p +=
 __e( address ) +
-'</strong> is not part of Streetlives yet.\n</p>\n\n<button class="Button Button--addLocationSmall js-add-location">Add location</button>\n';
+'</strong> <br/> is not part of Streetlives yet. Do you want to add this location to the map?\n</p>\n\n<button class="Button Button--addLocationSmall js-add-location">Add location</button>\n';
 
 }
 return __p

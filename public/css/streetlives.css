@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -59,15 +60,16 @@ table {
   padding: 20px;
   background: #333333;
   color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   box-sizing: border-box; }
 
 .HeaderTitle {
   flex: 1;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 20px;
   text-decoration: none;
-  text-transform: uppercase; }
+  text-transform: none;
+  font-family: 'Open Sans', sans-serif; }
 
 .HeaderItems {
   flex: 1;
@@ -82,14 +84,35 @@ table {
   outline: none;
   background: none;
   color: #FFFFFF;
-  font-size: 16px; }
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter; }
   .HeaderItem-link:hover {
-    text-decoration: underline;
-    cursor: pointer; }
+    text-decoration: none;
+    cursor: pointer;
+    animation-name: navBar-hover;
+    animation-duration: .3s;
+    color: #00D5A5; }
 
 .HeaderItem-link.is-selected {
-  color: #2ECC71; }
+  border: 1px solid #00D5A5; }
 
+@keyframes navBar-hover {
+  0% {
+    color: #FFFFFF; }
+  100% {
+    color: #00D5A5; } }
+@-webkit-keyframes navBar-hover {
+  0% {
+    color: #FFFFFF; }
+  100% {
+    color: #00D5A5; } }
+@keyframes btnInfo-hover {
+  0% {
+    background: #00D5A5; }
+  100% {
+    background: #53F9D4; } }
 .SearchField {
   position: absolute;
   width: 500px;
@@ -119,7 +142,7 @@ body,
   padding: 0; }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open sans', sans-serif;
   background: #FFFFFF;
   font-size: 16px;
   line-height: 1.5;
@@ -132,6 +155,7 @@ body {
 /*# sourceMappingURL=app.css.map */
 
 .Button {
+  font-family: 'Open Sans', sans-serif;
   padding: 10px 16px;
   border: none;
   background: #2ECC71;
@@ -143,8 +167,7 @@ body {
   z-index: 10;
   outline: none; }
   .Button:hover {
-    background: #27AF61;
-    border: 1px solid black; }
+    background: #27AF61; }
 
 .Button--addLocation {
   position: absolute;
@@ -232,15 +255,16 @@ body {
   padding: 20px;
   background: #333333;
   color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   box-sizing: border-box; }
 
 .HeaderTitle {
   flex: 1;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 20px;
   text-decoration: none;
-  text-transform: uppercase; }
+  text-transform: none;
+  font-family: 'Open Sans', sans-serif; }
 
 .HeaderItems {
   flex: 1;
@@ -255,18 +279,40 @@ body {
   outline: none;
   background: none;
   color: #FFFFFF;
-  font-size: 16px; }
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter; }
   .HeaderItem-link:hover {
-    text-decoration: underline;
-    cursor: pointer; }
+    text-decoration: none;
+    cursor: pointer;
+    animation-name: navBar-hover;
+    animation-duration: .3s;
+    color: #00D5A5; }
 
 .HeaderItem-link.is-selected {
-  color: #2ECC71; }
+  border: 1px solid #00D5A5; }
+
+@keyframes navBar-hover {
+  0% {
+    color: #FFFFFF; }
+  100% {
+    color: #00D5A5; } }
+@-webkit-keyframes navBar-hover {
+  0% {
+    color: #FFFFFF; }
+  100% {
+    color: #00D5A5; } }
+@keyframes btnInfo-hover {
+  0% {
+    background: #00D5A5; }
+  100% {
+    background: #53F9D4; } }
 
 /*# sourceMappingURL=header.css.map */
 
 .InputField {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   width: 100%; }
 
 .Input {
@@ -434,7 +480,7 @@ body {
 /*# sourceMappingURL=location.css.map */
 
 .LocationForm-fields {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open Sans', sans-serif; }
 
 .LocationForm-field {
   margin: 0 0 20px 0; }
@@ -482,7 +528,7 @@ body {
 /*# sourceMappingURL=location_form.css.map */
 
 .LocationInformation {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open Sans', sans-serif; }
 
 .LocationInformation-title {
   border-bottom: 1px solid #ccc;
@@ -501,7 +547,7 @@ body {
   font-size: 14px; }
 
 .LocationInformation-fields {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open Sans', sans-serif; }
 
 .LocationInformation-field {
   padding: 0 20px;
@@ -582,10 +628,11 @@ body {
 /*# sourceMappingURL=map.css.map */
 
 .Popup .leaflet-popup-content-wrapper {
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   background: #FFF;
   color: #333;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   border-radius: 2px;
   padding: 10px;
@@ -599,6 +646,7 @@ body {
   height: 15px; }
 
 .Popup .leaflet-popup-tip-container .leaflet-popup-tip {
+  font-family: 'Open Sans', sans-serif;
   background: #FFF;
   margin: -15px auto 0; }
 
@@ -608,7 +656,11 @@ body {
   font-weight: normal; }
 
 .Popup-addressName {
-  font-weight: bold; }
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 0;
+  width: 100%; }
 
 /*# sourceMappingURL=popup.css.map */
 

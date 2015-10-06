@@ -1,8 +1,9 @@
 .Popup .leaflet-popup-content-wrapper {
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   background: #FFF;
   color: #333;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   border-radius: 2px;
   padding: 10px;
@@ -16,6 +17,7 @@
   height:15px;
 }
 .Popup .leaflet-popup-tip-container .leaflet-popup-tip {
+  font-family: 'Open Sans', sans-serif;
   background: #FFF;
   margin: -15px auto 0;
 }
@@ -26,5 +28,7 @@
 }
 
 .Popup-addressName {
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
+  line-height: 30px;
 }

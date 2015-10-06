@@ -1,4 +1,5 @@
 .Button {
+  font-family: 'Open Sans', sans-serif;
   padding: 10px 16px;
   border: none;
   background: #2ECC71;
@@ -11,8 +12,7 @@
   outline: none;
   &:hover {
     background: #27AF61;
-    border: 1px solid black;
-    
+
   }
 }
 

@@ -1,30 +1,36 @@
-.Popup .leaflet-popup-content-wrapper {
-  text-align: center;
-  background: #FFF;
-  color: #333;
-  font-size: 16px;
-  line-height: 24px;
-  border-radius: 2px;
-  padding: 10px;
-  position: relative; }
+/*
+Error: Invalid CSS after "...e-height: 24px;": expected "}", was ""
+        on line 34 of sources/scss/popup.scss
 
-.Popup .leaflet-popup-content-wrapper a {
-  color: rgba(255, 255, 255, 0.5); }
+29: 
+30: .Popup-addressName {
+31:   font-family: 'Open Sans', sans-serif;
+32:   font-weight: bold;
+33:   line-height: 24px;
 
-.Popup .leaflet-popup-tip-container {
-  width: 30px;
-  height: 15px; }
-
-.Popup .leaflet-popup-tip-container .leaflet-popup-tip {
-  background: #FFF;
-  margin: -15px auto 0; }
-
-.Popup a.leaflet-popup-close-button {
-  color: #333;
-  z-index: 10;
-  font-weight: normal; }
-
-.Popup-addressName {
-  font-weight: bold; }
-
-/*# sourceMappingURL=popup.css.map */
+Backtrace:
+sources/scss/popup.scss:34
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:1162:in `expected'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:1098:in `expected'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:1093:in `tok!'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:640:in `block'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:632:in `ruleset'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:657:in `block_child'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:650:in `block_contents'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:117:in `stylesheet'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/scss/parser.rb:42:in `parse'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/engine.rb:403:in `_to_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/engine.rb:378:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/engine.rb:295:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/exec/sass_scss.rb:410:in `run'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/exec/base.rb:52:in `parse'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/lib/sass/exec/base.rb:19:in `parse!'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.15/bin/sass:13:in `<top (required)>'
+/usr/bin/sass:23:in `load'
+/usr/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...e-height: 24px;\": expected \"}\", was \"\"\A         on line 34 of sources/scss/popup.scss\A \A 29: \A 30: .Popup-addressName {\A 31:   font-family: 'Open Sans', sans-serif;\A 32:   font-weight: bold;\A 33:   line-height: 24px;"; }
