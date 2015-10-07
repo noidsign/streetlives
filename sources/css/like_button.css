@@ -1,0 +1,10 @@
+.LikeButtons {
+  margin: 0 0 10px 0; }
+
+.LikeButton--dislike {
+  background: #DDD; }
+
+.LikeButton.is-selected {
+  background: #CCC; }
+
+/*# sourceMappingURL=like_button.css.map */
