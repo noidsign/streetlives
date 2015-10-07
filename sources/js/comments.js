@@ -32,6 +32,7 @@ var CommentsView = SL.View.extend({
     this.$(".js-comments").append(this.commentsTemplate({ comments: this.comments }));
     var api = $('.CommentList').jScrollPane().data('jsp');
     api.reinitialise();
+    this.$('.js-comments').animate({ opacity: 1 }, 150);
   },
 
   _onFetchComments: function() {

@@ -40,6 +40,13 @@
   .Button--close:hover {
     background: #f1f1f1; }
 
+.Button.is-disabled {
+  background-color: #DCDCDC;
+  box-shadow: 0px 3px 1px rgba(177, 175, 175, 0.9);
+  color: #848484; }
+  .Button.is-disabled:hover {
+    background-color: #DCDCDC; }
+
 .Button.is-hidden {
   display: none; }
 

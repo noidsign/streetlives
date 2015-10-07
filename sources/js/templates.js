@@ -29,7 +29,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<ul class="CommentList scroll-pane">\n  ';
  comments.each(function(comment) { ;
-__p += '\n  <li class="CommentList-item">\n    <p>\n      ' +
+__p += '\n  <li class="CommentList-item">\n    <p>\n      <span class=\'CommentList-itemDate\'>' +
+__e( moment(comment.get('created_at')).format('MMMM Do YYYY') ) +
+'</span>\n      ' +
 __e( comment.get('comment') ) +
 '\n    </p>\n  </li>\n  ';
  }); ;
@@ -74,7 +76,7 @@ __e(offering.get('cartodb_id') ) +
 __e( offering.get('name') ) +
 '\n          </label>\n        </li>\n        ';
  }); ;
-__p += '\n      </ul>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your comment</label>\n      <div class="InputField js-field">\n        <textarea placeholder="Your comment" class="Input InputArea js-comment"></textarea>\n      </div>\n    </li>\n  </ul>\n\n  <footer class="Footer">\n    <button class="Button js-ok">' +
+__p += '\n      </ul>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your comment</label>\n      <div class="InputField js-field">\n        <textarea placeholder="Your comment" class="Input InputArea js-comment"></textarea>\n      </div>\n    </li>\n  </ul>\n\n  <footer class="Footer">\n    <button class="Button js-ok is-disabled">' +
 __e( title ) +
 '</button>\n  </footer>\n\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
 

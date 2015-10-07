@@ -8,7 +8,8 @@ var LocationForm = SL.View.extend({
 
   events: {
     'click .js-ok': '_onClickOk',
-    'click .js-cancel': 'close'
+    'click .js-cancel': 'close',
+    'keyup .js-name': '_onKeyUpName'
   },
 
   className: 'LocationForm is-hidden',
@@ -18,13 +19,19 @@ var LocationForm = SL.View.extend({
 
     _.bindAll(this, '_onKeyUp');
 
-    this.model = new Location(_.extend({ hidden: true }, this.options));
+    this.location = new Location(this.options);
+    this.location.bind('change:address', this._onChangeAddress, this);
+    this.location.bind('change:name', this._onChangeName, this);
 
-    this.model.bind('change:address', this._onChangeAddress, this);
-    this.model.bind('change:name', this._onChangeName, this);
+    this.model = new SL.Model({
+      commentable: false,
+      hidden: true
+    });
+
+    this.model.bind('change:enabled', this._onChangeEnabled, this);
     this.model.bind('change:hidden', this._onChangeHidden, this);
 
-    this.model.on("invalid", function(model, error) {
+    this.location.on("invalid", function(model, error) {
       if (error === 'name') {
         this.$(".js-field").addClass('has-error');
       }
@@ -34,7 +41,7 @@ var LocationForm = SL.View.extend({
   },
 
   render: function() {
-    var options = _.extend({ title: this._TEXT.title }, this.model.attributes);
+    var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
     this.$el.append(this.template(options));
     return this;
   },
@@ -44,11 +51,23 @@ var LocationForm = SL.View.extend({
   },
 
   _onChangeName: function() {
-    this.$('.js-name').val(this.model.get('name'));
+    this.$('.js-name').val(this.location.get('name'));
+  },
+
+  _onChangeEnabled: function() {
+    this.$('.js-ok').toggleClass('is-disabled', !this.model.get('enabled'));
   },
 
   _onChangeAddress: function() {
-    this.$('.js-address').text(this.model.get('address'));
+    this.$('.js-address').text(this.location.get('address'));
+  },
+
+  _onKeyUpName: function(e) {
+    if (this.$('.js-name').val().length > 0) {
+      this.model.set('enabled', true);
+    } else {
+      this.model.set('enabled', false);
+    }
   },
 
   _onKeyUp: function(e) {
@@ -57,7 +76,15 @@ var LocationForm = SL.View.extend({
     }
   },
 
+  _isEnabled: function() {
+    return this.model.get('enabled');
+  },
+
   _onClickOk: function() {
+    if (!this._isEnabled()) {
+      return;
+    }
+
     var ids = _.map(this.$('input:checked'), function(el) {
       return +$(el).val();
     });
@@ -67,9 +94,9 @@ var LocationForm = SL.View.extend({
 
     var self = this;
 
-    this.model.save({ name: name, comment: comment, offerings: ids }, {
+    this.location.save({ name: name, comment: comment, offerings: ids }, {
       success: function() {
-      self.trigger('add_location', this.model, this);
+      self.trigger('add_location', this.location, this);
       self.close();
     }});
   },
@@ -78,6 +105,7 @@ var LocationForm = SL.View.extend({
     this.$('.js-checkbox').attr('checked', false);
     this.$(".js-field").removeClass('has-error');
     this.$('.js-name').val('');
+    this.$('.js-ok').addClass('is-disabled');
     this.$('.js-comment').val('');
   },
 
@@ -109,7 +137,7 @@ var LocationForm = SL.View.extend({
 
   open: function(options) {
     $(document).on("keyup", this._onKeyUp);
-    this.model.set(options);
+    this.location.set(options);
     this._show();
     this._focus();
   },

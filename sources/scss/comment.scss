@@ -9,13 +9,22 @@
 .CommentList-item {
   margin: 0 10px 10px 0;
   padding: 0 0 10px 0;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #CCC;
   &:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
     border: none;
   }
 }
+
+.CommentList-itemDate {
+  text-align: right;
+  display: block;
+  margin: 0 0 3px 0;
+  font-size: 12px;
+  color: #666;
+}
+
 .Comments-inner {
   display: flex;
 }
@@ -32,6 +41,7 @@
 }
 
 .Comments-content {
+  opacity: 0;
   flex: 1;
   padding: 0 20px 0 0;
 }
@@ -41,3 +51,4 @@
   height: 200px;
   overflow: auto;
 }
+

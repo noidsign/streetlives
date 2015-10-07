@@ -68,6 +68,7 @@ module.exports = function (grunt) {
           'sources/js/vendor/underscore-min.js',
           'sources/js/vendor/backbone-min.js',
           'sources/js/vendor/jquery.mousewheel.js',
+          'sources/js/vendor/moment.min.js',
           'sources/js/vendor/jquery.jscrollpane.min.js',
           'sources/js/templates.js',
           'sources/js/base.js',
