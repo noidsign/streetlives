@@ -4,6 +4,7 @@
   padding: 20px;
 }
 .CommentList {
+  opacity: 0;
   margin: 0 10px 20px 0;
 }
 .CommentList-item {
@@ -41,7 +42,6 @@
 }
 
 .Comments-content {
-  opacity: 0;
   flex: 1;
   padding: 0 20px 0 0;
 }

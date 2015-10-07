@@ -261,7 +261,7 @@ this["JST"]["sources/templates/comments.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n    <button class="Button js-ok">Add comment</button>\n  </div>\n</div>\n';
+__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <div class="LikeButtons">\n      <button class="LikeButton js-like" data-value="1"></button>\n      <button class="LikeButton LikeButton--dislike js-like" data-value="0"></button>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -272,7 +272,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<ul class="CommentList scroll-pane">\n  ';
+__p += '<ul class="CommentList js-comment-list scroll-pane">\n  ';
  comments.each(function(comment) { ;
 __p += '\n  <li class="CommentList-item">\n    <p>\n      <span class=\'CommentList-itemDate\'>' +
 __e( moment(comment.get('created_at')).format('MMMM Do YYYY') ) +
@@ -344,7 +344,7 @@ __p += '\n    <li class="LocationInformation-field">\n      <label class="Locati
 __e( offerings ) +
 '</p>\n    </li>\n    ';
  } ;
-__p += '\n\n  </ul>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
+__p += '\n  </ul>\n\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
 
 }
 return __p
@@ -420,7 +420,7 @@ SL.Popup = function(options) {
 
 var Comment = SL.Model.extend({
   validate: function(attrs, options) {
-    if (!attrs.comment) {
+    if (!attrs.comment && attrs.liked == null) {
       return 'comment';
     }
   }
@@ -531,7 +531,9 @@ var CommentsView = SL.View.extend({
   className: 'Comments',
 
   events: {
-    'click .js-ok': '_onSubmit'
+    'click .js-ok': '_onSubmit',
+    'keyup .js-comment': '_onKeyUp',
+    'click .js-like': '_onClickLike'
   },
 
   initialize: function(options) {
@@ -539,7 +541,14 @@ var CommentsView = SL.View.extend({
 
     this.options = options;
     this.template = this._getTemplate('comments');
+
+    this.comment = new Comment({ liked: null, location_id: this.options.location_id });
+    this.comment.bind('change:liked', this._onChangeLiked, this);
+    this.comment.bind('change', this._checkEnabled, this);
+
     this.commentsTemplate = this._getTemplate('comments_list');
+
+    this._setupModel();
 
     this.comments = new Comments();
 
@@ -558,31 +567,78 @@ var CommentsView = SL.View.extend({
     this.$(".js-comments").append(this.commentsTemplate({ comments: this.comments }));
     var api = $('.CommentList').jScrollPane().data('jsp');
     api.reinitialise();
-    this.$('.js-comments').animate({ opacity: 1 }, 150);
+    this.$('.js-comment-list').animate({ opacity: 1 }, 150);
+  },
+
+  _setupModel: function() {
+    this.model = new SL.Model({
+      enabled: false
+    });
+
+    this.model.bind('change:enabled', this._onChangeEnabled, this);
+  },
+
+  _onChangeLiked: function() {
+    this.$('.js-like').removeClass('is-selected');
+    var liked = this.comment.get('liked');
+    if (liked !== null) {
+      this.$('[data-value="' + (liked ? 1 : 0) + '"]').addClass('is-selected');
+    }
+  },
+
+  _onChangeEnabled: function() {
+    this.$('.js-ok').toggleClass('is-disabled', !this.model.get('enabled'));
   },
 
   _onFetchComments: function() {
     this._renderComments();
   },
 
-  _onSubmit: function(e) {
-    this._killEvent(e);
-    var msg = this.$('.js-comment').val();
-    var comment = new Comment({ location_id: this.options.location_id, comment: msg });
+  _isEnabled: function() {
+    return this.model.get('enabled');
+  },
 
-    comment.on("invalid", function(model, error) {
+  _onClickLike: function(e) {
+    this._killEvent(e);
+    var like = $(e.target).data('value');
+    var liked = this.comment.get('liked');
+    console.log(like, liked)
+    this.comment.set({ liked: (like == liked) ? null : like });
+  },
+
+  _checkEnabled: function() {
+    var enabled = this.$('.js-comment').val().length > 0 || this.comment.get('liked') !== null;
+    console.log(enabled)
+    this.model.set('enabled', enabled);
+  },
+
+  _onKeyUp: function() {
+    this.comment.set({ comment: this.$('.js-comment').val() });
+  },
+
+  _onSubmit: function(e) {
+    if (!this._isEnabled()) {
+      return;
+    }
+
+    this._killEvent(e);
+
+    this.comment.on("invalid", function(model, error) {
       if (error === 'comment') {
         this.$(".js-comment").parent().addClass('has-error');
       }
     }, this);
 
-    this.comments.add(comment);
+    this.comments.add(this.comment);
 
     var self = this;
-    comment.save({}, {
+    console.log(this.comment.attributes)
+
+    this.comment.save({}, {
       success: function() {
-      self.trigger('comment', this);
-    }});
+        self.$(".js-ok").addClass(".is-disabled");
+        self.trigger('comment', this);
+      }});
   }
 });
 
@@ -629,23 +685,8 @@ var LocationForm = SL.View.extend({
 
     _.bindAll(this, '_onKeyUp');
 
-    this.location = new Location(this.options);
-    this.location.bind('change:address', this._onChangeAddress, this);
-    this.location.bind('change:name', this._onChangeName, this);
-
-    this.model = new SL.Model({
-      commentable: false,
-      hidden: true
-    });
-
-    this.model.bind('change:enabled', this._onChangeEnabled, this);
-    this.model.bind('change:hidden', this._onChangeHidden, this);
-
-    this.location.on("invalid", function(model, error) {
-      if (error === 'name') {
-        this.$(".js-field").addClass('has-error');
-      }
-    }, this);
+    this._setupModel();
+    this._setupLocation();
 
     this.template = this._getTemplate('location_form');
   },
@@ -654,6 +695,28 @@ var LocationForm = SL.View.extend({
     var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
     this.$el.append(this.template(options));
     return this;
+  },
+
+  _setupModel: function() {
+    this.model = new SL.Model({
+      enabled: false,
+      hidden: true
+    });
+
+    this.model.bind('change:enabled', this._onChangeEnabled, this);
+    this.model.bind('change:hidden', this._onChangeHidden, this);
+  },
+
+  _setupLocation: function() {
+    this.location = new Location(this.options);
+    this.location.bind('change:address', this._onChangeAddress, this);
+    this.location.bind('change:name', this._onChangeName, this);
+
+    this.location.on("invalid", function(model, error) {
+      if (error === 'name') {
+        this.$(".js-field").addClass('has-error');
+      }
+    }, this);
   },
 
   _onChangeHidden: function() {
@@ -672,12 +735,8 @@ var LocationForm = SL.View.extend({
     this.$('.js-address').text(this.location.get('address'));
   },
 
-  _onKeyUpName: function(e) {
-    if (this.$('.js-name').val().length > 0) {
-      this.model.set('enabled', true);
-    } else {
-      this.model.set('enabled', false);
-    }
+  _onKeyUpName: function() {
+    this.model.set('enabled', this.$('.js-name').val().length > 0);
   },
 
   _onKeyUp: function(e) {
@@ -769,7 +828,6 @@ var LocationInformation = SL.View.extend({
   },
 
   events: {
-    'click .js-ok': '_onClickOk',
     'click .js-cancel': 'close'
   },
 
@@ -780,29 +838,46 @@ var LocationInformation = SL.View.extend({
 
     _.bindAll(this, '_onKeyUp');
 
-    this.model = new Location(_.extend({ hidden: true }, this.options));
-
-    this.model.bind('change:address', this._onChangeAddress, this);
-    this.model.bind('change:name', this._onChangeName, this);
-    this.model.bind('change:hidden', this._onChangeHidden, this);
-
-    this.model.on("invalid", function(model, error) {
-      if (error === 'name') {
-        this.$(".js-field").addClass('has-error');
-      }
-    }, this);
+    this._setupModel();
+    this._setupLocation();
 
     this.template = this._getTemplate('location_information');
   },
 
   render: function() {
     this.$el.empty();
-    var options = _.extend({ title: this._TEXT.title }, this.model.attributes);
+    var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
+
     this.$el.append(this.template(options));
+
     if (this.comments) {
-    this.$('.js-fields').append(this.comments.$el);
+      this.$('.js-fields').append(this.comments.$el);
     }
     return this;
+  },
+
+  _setupLocation: function() {
+    this.location = new Location(this.options);
+    this.location.bind('change:address', this._onChangeAddress, this);
+    this.location.bind('change:name', this._onChangeName, this);
+
+    this.location.on("invalid", function(model, error) {
+      if (error === 'name') {
+        this.$(".js-field").addClass('has-error');
+      }
+    }, this);
+  },
+
+  _setupModel: function() {
+    this.model = new SL.Model({
+      hidden: true
+    });
+
+    this.model.bind('change:hidden', this._onChangeHidden, this);
+  },
+
+  _onChangeEnabled: function() {
+    this.$('.js-ok').toggleClass('is-disabled', !this.model.get('enabled'));
   },
 
   _onChangeHidden: function() {
@@ -810,33 +885,17 @@ var LocationInformation = SL.View.extend({
   },
 
   _onChangeName: function() {
-    this.$('.js-name').val(this.model.get('name'));
+    this.$('.js-name').val(this.location.get('name'));
   },
 
   _onChangeAddress: function() {
-    this.$('.js-address').text(this.model.get('address'));
+    this.$('.js-address').text(this.location.get('address'));
   },
 
   _onKeyUp: function(e) {
     if (e.keyCode === 27) {
       this.close();
     }
-  },
-
-  _onClickOk: function() {
-    var ids = _.map(this.$('input:checked'), function(el) {
-      return +$(el).val();
-    });
-
-    var name = this.$('.js-name').val();
-
-    var self = this;
-
-    this.model.save({ name: name, offerings: ids }, {
-      success: function() {
-      self.trigger('add_location', this.model, this);
-      self.close();
-    }});
   },
 
   _clear: function() {
@@ -873,7 +932,7 @@ var LocationInformation = SL.View.extend({
     this.comments = new CommentsView({ location_id: options.cartodb_id });
     this.comments.render();
     this.comments.bind('comment', this._onComment, this);
-    this.model.clear().set(_.extend({ offerings: '' }, options));
+    this.location.clear().set(_.extend({ offerings: '' }, options));
     this.render();
     this._show();
   },

@@ -50,4 +50,26 @@
 .Button.is-hidden {
   display: none; }
 
+.LikeButton {
+  display: inline-block;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+  border: 1px solid #ddd;
+  background: #DDD; }
+  .LikeButton:hover {
+    border: 1px solid #ccc; }
+
+.LikeButtons {
+  margin: 0 0 10px 0; }
+
+.LikeButton--dislike {
+  background: #DDD; }
+
+.LikeButton.is-selected {
+  background: #CCC; }
+
 /*# sourceMappingURL=button.css.map */

@@ -7,7 +7,6 @@ var LocationInformation = SL.View.extend({
   },
 
   events: {
-    'click .js-ok': '_onClickOk',
     'click .js-cancel': 'close'
   },
 
@@ -18,29 +17,46 @@ var LocationInformation = SL.View.extend({
 
     _.bindAll(this, '_onKeyUp');
 
-    this.model = new Location(_.extend({ hidden: true }, this.options));
-
-    this.model.bind('change:address', this._onChangeAddress, this);
-    this.model.bind('change:name', this._onChangeName, this);
-    this.model.bind('change:hidden', this._onChangeHidden, this);
-
-    this.model.on("invalid", function(model, error) {
-      if (error === 'name') {
-        this.$(".js-field").addClass('has-error');
-      }
-    }, this);
+    this._setupModel();
+    this._setupLocation();
 
     this.template = this._getTemplate('location_information');
   },
 
   render: function() {
     this.$el.empty();
-    var options = _.extend({ title: this._TEXT.title }, this.model.attributes);
+    var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
+
     this.$el.append(this.template(options));
+
     if (this.comments) {
-    this.$('.js-fields').append(this.comments.$el);
+      this.$('.js-fields').append(this.comments.$el);
     }
     return this;
+  },
+
+  _setupLocation: function() {
+    this.location = new Location(this.options);
+    this.location.bind('change:address', this._onChangeAddress, this);
+    this.location.bind('change:name', this._onChangeName, this);
+
+    this.location.on("invalid", function(model, error) {
+      if (error === 'name') {
+        this.$(".js-field").addClass('has-error');
+      }
+    }, this);
+  },
+
+  _setupModel: function() {
+    this.model = new SL.Model({
+      hidden: true
+    });
+
+    this.model.bind('change:hidden', this._onChangeHidden, this);
+  },
+
+  _onChangeEnabled: function() {
+    this.$('.js-ok').toggleClass('is-disabled', !this.model.get('enabled'));
   },
 
   _onChangeHidden: function() {
@@ -48,33 +64,17 @@ var LocationInformation = SL.View.extend({
   },
 
   _onChangeName: function() {
-    this.$('.js-name').val(this.model.get('name'));
+    this.$('.js-name').val(this.location.get('name'));
   },
 
   _onChangeAddress: function() {
-    this.$('.js-address').text(this.model.get('address'));
+    this.$('.js-address').text(this.location.get('address'));
   },
 
   _onKeyUp: function(e) {
     if (e.keyCode === 27) {
       this.close();
     }
-  },
-
-  _onClickOk: function() {
-    var ids = _.map(this.$('input:checked'), function(el) {
-      return +$(el).val();
-    });
-
-    var name = this.$('.js-name').val();
-
-    var self = this;
-
-    this.model.save({ name: name, offerings: ids }, {
-      success: function() {
-      self.trigger('add_location', this.model, this);
-      self.close();
-    }});
   },
 
   _clear: function() {
@@ -111,7 +111,7 @@ var LocationInformation = SL.View.extend({
     this.comments = new CommentsView({ location_id: options.cartodb_id });
     this.comments.render();
     this.comments.bind('comment', this._onComment, this);
-    this.model.clear().set(_.extend({ offerings: '' }, options));
+    this.location.clear().set(_.extend({ offerings: '' }, options));
     this.render();
     this._show();
   },

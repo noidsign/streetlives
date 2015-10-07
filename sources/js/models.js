@@ -1,6 +1,6 @@
 var Comment = SL.Model.extend({
   validate: function(attrs, options) {
-    if (!attrs.comment) {
+    if (!attrs.comment && attrs.liked == null) {
       return 'comment';
     }
   }

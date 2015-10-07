@@ -16,7 +16,7 @@ this["JST"]["sources/templates/comments.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n    <button class="Button js-ok">Add comment</button>\n  </div>\n</div>\n';
+__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <div class="LikeButtons">\n      <button class="LikeButton js-like" data-value="1"></button>\n      <button class="LikeButton LikeButton--dislike js-like" data-value="0"></button>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -27,7 +27,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<ul class="CommentList scroll-pane">\n  ';
+__p += '<ul class="CommentList js-comment-list scroll-pane">\n  ';
  comments.each(function(comment) { ;
 __p += '\n  <li class="CommentList-item">\n    <p>\n      <span class=\'CommentList-itemDate\'>' +
 __e( moment(comment.get('created_at')).format('MMMM Do YYYY') ) +
@@ -99,7 +99,7 @@ __p += '\n    <li class="LocationInformation-field">\n      <label class="Locati
 __e( offerings ) +
 '</p>\n    </li>\n    ';
  } ;
-__p += '\n\n  </ul>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
+__p += '\n  </ul>\n\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
 
 }
 return __p

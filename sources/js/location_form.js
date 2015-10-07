@@ -19,23 +19,8 @@ var LocationForm = SL.View.extend({
 
     _.bindAll(this, '_onKeyUp');
 
-    this.location = new Location(this.options);
-    this.location.bind('change:address', this._onChangeAddress, this);
-    this.location.bind('change:name', this._onChangeName, this);
-
-    this.model = new SL.Model({
-      commentable: false,
-      hidden: true
-    });
-
-    this.model.bind('change:enabled', this._onChangeEnabled, this);
-    this.model.bind('change:hidden', this._onChangeHidden, this);
-
-    this.location.on("invalid", function(model, error) {
-      if (error === 'name') {
-        this.$(".js-field").addClass('has-error');
-      }
-    }, this);
+    this._setupModel();
+    this._setupLocation();
 
     this.template = this._getTemplate('location_form');
   },
@@ -44,6 +29,28 @@ var LocationForm = SL.View.extend({
     var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
     this.$el.append(this.template(options));
     return this;
+  },
+
+  _setupModel: function() {
+    this.model = new SL.Model({
+      enabled: false,
+      hidden: true
+    });
+
+    this.model.bind('change:enabled', this._onChangeEnabled, this);
+    this.model.bind('change:hidden', this._onChangeHidden, this);
+  },
+
+  _setupLocation: function() {
+    this.location = new Location(this.options);
+    this.location.bind('change:address', this._onChangeAddress, this);
+    this.location.bind('change:name', this._onChangeName, this);
+
+    this.location.on("invalid", function(model, error) {
+      if (error === 'name') {
+        this.$(".js-field").addClass('has-error');
+      }
+    }, this);
   },
 
   _onChangeHidden: function() {
@@ -62,12 +69,8 @@ var LocationForm = SL.View.extend({
     this.$('.js-address').text(this.location.get('address'));
   },
 
-  _onKeyUpName: function(e) {
-    if (this.$('.js-name').val().length > 0) {
-      this.model.set('enabled', true);
-    } else {
-      this.model.set('enabled', false);
-    }
+  _onKeyUpName: function() {
+    this.model.set('enabled', this.$('.js-name').val().length > 0);
   },
 
   _onKeyUp: function(e) {
