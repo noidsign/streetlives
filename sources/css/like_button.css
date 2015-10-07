@@ -1,6 +1,19 @@
 .LikeButtons {
   margin: 0 0 10px 0; }
 
+.LikeButton {
+  display: inline-block;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+  border: 1px solid #ddd;
+  background: #DDD; }
+  .LikeButton:hover {
+    border: 1px solid #ccc; }
+
 .LikeButton--dislike {
   background: #DDD; }
 
