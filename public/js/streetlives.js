@@ -971,6 +971,7 @@ var MapView = SL.View.extend({
     this.locationForm = new LocationForm({
       offerings: this.offerings
     });
+
     this.locationForm.bind('add_location', this._onAddLocation, this);
     this.$el.append(this.locationForm.render().$el);
   },
@@ -1021,10 +1022,12 @@ var MapView = SL.View.extend({
   },
 
   _onAddLocation: function() {
-
     var marker = L.circleMarker(this.model.get('coordinates'), this.defaults.style.marker);
+
     marker.on('click', function() {
+      console.log('click');
     });
+
     marker.addTo(this.map);
 
     this._removeCurrentSelection();
@@ -1064,7 +1067,7 @@ var MapView = SL.View.extend({
 
     var content = template({ name: this.model.get('name'), address: this.model.get('address' )});
 
-    this.popup = SL.Popup({ autoPanPaddingTopLeft: [10, 75], offset: [0, -5]})
+    this.popup = SL.Popup({ autoPanPaddingTopLeft: [10, 75], offset: [0, -5] })
     .setLatLng(coordinates)
     .setContent(content)
     .openOn(this.map);
