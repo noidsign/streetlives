@@ -59,9 +59,8 @@ var CommentsView = SL.View.extend({
   },
 
   _renderComments: function() {
-
-    this.comments.each(function(comment) {
-      var comment = new CommentView({ model: comment });
+    this.comments.each(function(model) {
+      var comment = new CommentView({ model: model });
       this.$(".js-comment-list").append(comment.render().$el);
     }, this);
 

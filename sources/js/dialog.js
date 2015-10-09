@@ -22,12 +22,6 @@ SL.Dialog = SL.View.extend({
   render: function() {
     this.$el.append(this.template(this.model.attributes));
 
-    var api = this.$('.js-scroll').jScrollPane().data('jsp');
-
-    if (api) {
-      api.reinitialise();
-    }
-
     return this;
   },
 
