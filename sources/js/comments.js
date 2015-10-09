@@ -1,5 +1,26 @@
 'use strict';
 
+var CommentView = SL.View.extend({
+
+  tagName: 'li',
+
+  className: 'CommentList-item',
+
+  events: {
+  },
+
+  initialize: function(options) {
+    this.options = options;
+    this.model = this.options.model;
+    this.template = this._getTemplate('comment');
+  },
+
+  render: function() {
+    this.$el.append(this.template(this.model.attributes));
+    return this;
+  }
+});
+
 var CommentsView = SL.View.extend({
 
   className: 'Comments',
@@ -16,7 +37,7 @@ var CommentsView = SL.View.extend({
     this.options = options;
     this.template = this._getTemplate('comments');
 
-    this.comment = new Comment({ liked: null, location_id: this.options.location_id });
+    this.comment = new Comment({ location_id: this.options.location_id });
     this.comment.bind('change:liked', this._onChangeLiked, this);
     this.comment.bind('change', this._checkEnabled, this);
 
@@ -38,9 +59,18 @@ var CommentsView = SL.View.extend({
   },
 
   _renderComments: function() {
-    this.$(".js-comments").append(this.commentsTemplate({ comments: this.comments }));
-    var api = $('.CommentList').jScrollPane().data('jsp');
-    api.reinitialise();
+
+    this.comments.each(function(comment) {
+      var comment = new CommentView({ model: comment });
+      this.$(".js-comment-list").append(comment.render().$el);
+    }, this);
+
+    var api = this.$('.js-comment-list').jScrollPane().data('jsp');
+
+    if (api) {
+      api.reinitialise();
+    }
+
     this.$('.js-comment-list').animate({ opacity: 1 }, 150);
   },
 
@@ -76,13 +106,11 @@ var CommentsView = SL.View.extend({
     this._killEvent(e);
     var like = $(e.target).data('value');
     var liked = this.comment.get('liked');
-    console.log(like, liked)
     this.comment.set({ liked: (like == liked) ? null : like });
   },
 
   _checkEnabled: function() {
     var enabled = this.$('.js-comment').val().length > 0 || this.comment.get('liked') !== null;
-    console.log(enabled)
     this.model.set('enabled', enabled);
   },
 
@@ -106,7 +134,6 @@ var CommentsView = SL.View.extend({
     this.comments.add(this.comment);
 
     var self = this;
-    console.log(this.comment.attributes)
 
     this.comment.save({}, {
       success: function() {

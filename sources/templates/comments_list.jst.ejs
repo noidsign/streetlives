@@ -1,11 +1,2 @@
-<ul class="CommentList js-comment-list scroll-pane">
-  <% comments.each(function(comment) { %>
-  <li class="CommentList-item">
-    <p>
-      <span class='CommentList-itemDate'><%- moment(comment.get('created_at')).format('MMMM Do YYYY') %></span>
-      <%- comment.get('comment') %>
-    </p>
-  </li>
-  <% }); %>
-</ul>
+<ul class="CommentList js-comment-list scroll-pane"></ul>
 

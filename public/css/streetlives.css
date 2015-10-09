@@ -1,8 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -46,71 +41,48 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-.Header {
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  flex-direction: row;
-  flex-flow: space-around;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  width: 100%;
-  padding: 20px;
-  background: #333333;
-  color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
-  box-sizing: border-box; }
-
-.HeaderTitle {
-  flex: 1;
-  color: #FFFFFF;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase; }
-
-.HeaderItems {
-  flex: 1;
-  text-align: right; }
-
-.HeaderItem {
-  display: inline-block;
-  color: #FFFFFF; }
-
-.HeaderItem-link {
-  border: none;
-  outline: none;
-  background: none;
-  color: #FFFFFF;
-  font-size: 16px; }
-  .HeaderItem-link:hover {
-    text-decoration: underline;
-    cursor: pointer; }
-
-.HeaderItem-link.is-selected {
-  color: #2ECC71; }
-
-.SearchField {
-  position: absolute;
-  width: 500px;
-  height: 40px;
-  top: 80px;
-  left: 55px;
-  z-index: 10; }
-
-.SearchInput {
-  border: 1px solid transparent;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  padding: 0 50px 0 13px;
-  font-size: 15px;
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
   font-weight: 300;
-  text-overflow: ellipsis; }
-  .SearchInput:focus {
-    border: 1px solid transparent; }
-  .SearchInput:hover {
-    border: 1px solid transparent; }
-
+  src: local("Lato Light"), local("Lato-Light"), url(https://fonts.gstatic.com/s/lato/v11/IY9HZVvI1cMoAHxvl0w9LVKPGs1ZzpMvnHX-7fPOuAc.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Lato Light"), local("Lato-Light"), url(https://fonts.gstatic.com/s/lato/v11/22JRxvfANxSmnAhzbFH8PgLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/8qcEw_nrk_5HEcCpYdJu8BTbgVql8nDJpwnrE27mub0.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/MDadn8DQ_3oT6kvnUq_2r_esZW2xOQ-xsNqO47m55DA.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/rZPI2gHXi8zxUjnybc2ZQFKPGs1ZzpMvnHX-7fPOuAc.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/MgNNr5y1C_tIEuLEmicLmwLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
 html,
 body,
 .Map {
@@ -119,15 +91,18 @@ body,
   padding: 0; }
 
 body {
-  font-family: 'Lato', sans-serif;
   background: #FFFFFF;
   font-size: 16px;
   line-height: 1.5;
   color: #222326;
+  font-family: 'Lato', sans-serif;
   background-color: #f8f8f8;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow: hidden; }
+
+a {
+  font-family: 'Lato', sans-serif; }
 
 /*# sourceMappingURL=app.css.map */
 
@@ -226,12 +201,57 @@ body {
   flex: 1;
   padding: 0 20px 0 0; }
 
-.scroll-pane {
+.Comments .scroll-pane {
   width: 100%;
   height: 200px;
   overflow: auto; }
 
 /*# sourceMappingURL=comment.css.map */
+
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Lato Light"), local("Lato-Light"), url(https://fonts.gstatic.com/s/lato/v11/IY9HZVvI1cMoAHxvl0w9LVKPGs1ZzpMvnHX-7fPOuAc.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Lato Light"), local("Lato-Light"), url(https://fonts.gstatic.com/s/lato/v11/22JRxvfANxSmnAhzbFH8PgLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/8qcEw_nrk_5HEcCpYdJu8BTbgVql8nDJpwnrE27mub0.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/MDadn8DQ_3oT6kvnUq_2r_esZW2xOQ-xsNqO47m55DA.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/rZPI2gHXi8zxUjnybc2ZQFKPGs1ZzpMvnHX-7fPOuAc.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/MgNNr5y1C_tIEuLEmicLmwLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+
+/*# sourceMappingURL=font.css.map */
 
 .Header {
   display: flex;
@@ -402,24 +422,33 @@ body {
 .LikeButtons {
   margin: 0 0 10px 0; }
 
-.LikeButton {
+.LikeButtons-title {
+  margin: 0 0 3px 0;
+  font-size: 12px; }
+
+.LikeButtons-list {
+  display: inline-block; }
+
+.LikeButtons-listItem {
   display: inline-block;
+  margin: 0 5px 0 0; }
+
+.LikeButton {
+  display: block;
   border: none;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
   z-index: 10;
   outline: none;
-  border: 1px solid #ddd;
-  background: #DDD; }
-  .LikeButton:hover {
-    border: 1px solid #ccc; }
+  opacity: 0.7;
+  background: transparent url(/img/hand_up.png) no-repeat; }
 
 .LikeButton--dislike {
-  background: #DDD; }
+  background: transparent url(/img/hand_down.png) no-repeat; }
 
 .LikeButton.is-selected {
-  background: #CCC; }
+  opacity: 1; }
 
 /*# sourceMappingURL=like_button.css.map */
 
@@ -584,6 +613,9 @@ body {
   position: absolute;
   width: 100%; }
 
+.Map .cartodb-logo {
+  z-index: 99 !important; }
+
 .Map .cartodb-tiles-loader {
   position: absolute;
   left: auto;
@@ -619,6 +651,49 @@ body {
 
 /*# sourceMappingURL=map.css.map */
 
+
+
+/*# sourceMappingURL=paeg.css.map */
+
+.Page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000; }
+
+.Page.is-hidden {
+  display: none; }
+
+.Page-inner {
+  position: relative;
+  width: 80%;
+  height: 400px;
+  background: #FFF;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 12px; }
+
+.Page-content {
+  width: 400px;
+  height: 200px;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 300; }
+
+.Page .scroll-pane {
+  width: 100%;
+  height: 200px;
+  overflow: auto; }
+
+/*# sourceMappingURL=page.css.map */
+
 .Popup .leaflet-popup-content-wrapper {
   text-align: center;
   background: #FFF;
@@ -650,10 +725,6 @@ body {
 
 /*# sourceMappingURL=popup.css.map */
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -721,3 +792,48 @@ table {
     border: 1px solid transparent; }
 
 /*# sourceMappingURL=search.css.map */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*# sourceMappingURL=xeset.css.map */

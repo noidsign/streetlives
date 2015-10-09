@@ -257,11 +257,25 @@ __e( title ) +
 return __p
 };
 
+this["JST"]["sources/templates/comment.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<p>\n  <span class=\'CommentList-itemDate\'>' +
+__e( moment(created_at).format('MMMM Do YYYY') ) +
+'</span>\n  ' +
+__e( comment ) +
+'\n</p>\n';
+
+}
+return __p
+};
+
 this["JST"]["sources/templates/comments.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <div class="LikeButtons">\n      <button class="LikeButton js-like" data-value="1"></button>\n      <button class="LikeButton LikeButton--dislike js-like" data-value="0"></button>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
+__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -269,18 +283,9 @@ return __p
 
 this["JST"]["sources/templates/comments_list.jst.ejs"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<ul class="CommentList js-comment-list scroll-pane">\n  ';
- comments.each(function(comment) { ;
-__p += '\n  <li class="CommentList-item">\n    <p>\n      <span class=\'CommentList-itemDate\'>' +
-__e( moment(comment.get('created_at')).format('MMMM Do YYYY') ) +
-'</span>\n      ' +
-__e( comment.get('comment') ) +
-'\n    </p>\n  </li>\n  ';
- }); ;
-__p += '\n</ul>\n\n';
+__p += '<ul class="CommentList js-comment-list scroll-pane"></ul>\n\n';
 
 }
 return __p
@@ -350,6 +355,18 @@ __p += '\n  </ul>\n\n  <button class="Button Button--close js-cancel">✕</butto
 return __p
 };
 
+this["JST"]["sources/templates/page.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="Page-inner">\n  <div class="Page-content js-scroll">\n    ' +
+__e( text ) +
+'\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+
+}
+return __p
+};
+
 this["JST"]["sources/templates/popup.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -380,10 +397,44 @@ return __p
 };
 'use strict';
 
+;(function(Backbone) {
+
+  // The super method takes two parameters: a method name
+  // and an array of arguments to pass to the overridden method.
+  // This is to optimize for the common case of passing 'arguments'.
+  function _super(methodName, args) {
+
+    // Keep track of how far up the prototype chain we have traversed,
+    // in order to handle nested calls to _super.
+    this._superCallObjects || (this._superCallObjects = {});
+    var currentObject = this._superCallObjects[methodName] || this,
+        parentObject  = findSuper(methodName, currentObject);
+    this._superCallObjects[methodName] = parentObject;
+
+    var result = parentObject[methodName].apply(this, args || []);
+    delete this._superCallObjects[methodName];
+    return result;
+  }
+
+  // Find the next object up the prototype chain that has a
+  // different implementation of the method.
+  function findSuper(methodName, childObject) {
+    var object = childObject;
+    while (object[methodName] === childObject[methodName]) {
+      object = object.constructor.__super__;
+    }
+    return object;
+  }
+
+  _.each(["Model", "Collection", "View", "Router"], function(klass) {
+    Backbone[klass].prototype._super = _super;
+  });
+
+})(Backbone);
+
 var SL = {};
 
-SL.Model = Backbone.Model.extend({
-});
+SL.Model = Backbone.Model.extend();
 
 SL.Collection = Backbone.Collection.extend({
 });
@@ -467,13 +518,56 @@ var App = SL.View.extend({
 
   initialize: function() {
     this.map = new MapView({ el: this.$('.Map') });
-    this.header = new Header();
+
+    this._setupPrivacyPage();
+    this._setupAboutPage();
+
+    this._setupRouter();
+
+    this.header = new Header({
+      router: this.router
+    });
+
     this.render();
   },
 
   render: function() {
     this.map.render();
+
+    this.$el.append(this.privacyPage.render().$el);
+    this.$el.append(this.aboutPage.render().$el);
     this.$el.append(this.header.render().$el);
+  },
+
+  _setupAboutPage: function() {
+    this.aboutPage = new Page({ text: 'about' });
+    this.aboutPage.bind('close', this._showMap, this);
+  },
+
+  _setupPrivacyPage: function() {
+    this.privacyPage = new Page({ text: 'privacy' });
+    this.privacyPage.bind('close', this._showMap, this);
+  },
+
+  _setupRouter: function() {
+    this.router = new Router();
+
+    this.router.bind('show_about', this._showAbout, this);
+    this.router.bind('show_privacy', this._showPrivacy, this);
+
+    Backbone.history.start({ pushState: true });
+  },
+
+  _showAbout: function() {
+    this.aboutPage.show();
+  },
+
+  _showPrivacy: function() {
+    this.privacyPage.show();
+  },
+
+  _showMap: function() {
+    this.router.navigate('', { trigger: true });
   }
 });
 
@@ -526,6 +620,27 @@ var Button = SL.View.extend({
 
 'use strict';
 
+var CommentView = SL.View.extend({
+
+  tagName: 'li',
+
+  className: 'CommentList-item',
+
+  events: {
+  },
+
+  initialize: function(options) {
+    this.options = options;
+    this.model = this.options.model;
+    this.template = this._getTemplate('comment');
+  },
+
+  render: function() {
+    this.$el.append(this.template(this.model.attributes));
+    return this;
+  }
+});
+
 var CommentsView = SL.View.extend({
 
   className: 'Comments',
@@ -542,7 +657,7 @@ var CommentsView = SL.View.extend({
     this.options = options;
     this.template = this._getTemplate('comments');
 
-    this.comment = new Comment({ liked: null, location_id: this.options.location_id });
+    this.comment = new Comment({ location_id: this.options.location_id });
     this.comment.bind('change:liked', this._onChangeLiked, this);
     this.comment.bind('change', this._checkEnabled, this);
 
@@ -564,9 +679,18 @@ var CommentsView = SL.View.extend({
   },
 
   _renderComments: function() {
-    this.$(".js-comments").append(this.commentsTemplate({ comments: this.comments }));
-    var api = $('.CommentList').jScrollPane().data('jsp');
-    api.reinitialise();
+
+    this.comments.each(function(comment) {
+      var comment = new CommentView({ model: comment });
+      this.$(".js-comment-list").append(comment.render().$el);
+    }, this);
+
+    var api = this.$('.js-comment-list').jScrollPane().data('jsp');
+
+    if (api) {
+      api.reinitialise();
+    }
+
     this.$('.js-comment-list').animate({ opacity: 1 }, 150);
   },
 
@@ -602,13 +726,11 @@ var CommentsView = SL.View.extend({
     this._killEvent(e);
     var like = $(e.target).data('value');
     var liked = this.comment.get('liked');
-    console.log(like, liked)
     this.comment.set({ liked: (like == liked) ? null : like });
   },
 
   _checkEnabled: function() {
     var enabled = this.$('.js-comment').val().length > 0 || this.comment.get('liked') !== null;
-    console.log(enabled)
     this.model.set('enabled', enabled);
   },
 
@@ -632,7 +754,6 @@ var CommentsView = SL.View.extend({
     this.comments.add(this.comment);
 
     var self = this;
-    console.log(this.comment.attributes)
 
     this.comment.save({}, {
       success: function() {
@@ -644,13 +765,93 @@ var CommentsView = SL.View.extend({
 
 'use strict';
 
+SL.Dialog = SL.View.extend({
+  className: 'Dialog is-hidden',
+
+  events: {
+    'click .js-cancel': 'close'
+  },
+
+  initialize: function(options) {
+
+    _.bindAll(this, '_onKeyUp');
+
+    $(document).on("keyup", this._onKeyUp);
+
+    this.options = options;
+    this.template = this._getTemplate(this.templateName);
+
+    this._setupModel();
+  },
+
+  render: function() {
+    this.$el.append(this.template(this.model.attributes));
+
+    var api = this.$('.js-scroll').jScrollPane().data('jsp');
+
+    if (api) {
+      api.reinitialise();
+    }
+
+    return this;
+  },
+
+  _onChangeHidden: function() {
+    this.$el.toggleClass('is-hidden', this.model.get('hidden'));
+  },
+
+  _setupModel: function() {
+    this.model = new SL.Model({
+      text: this.options.text,
+      hidden: true
+    });
+
+    this.model.bind('change:hidden', this._onChangeHidden, this);
+  },
+
+  toggle: function() {
+    this.model.set('hidden', !this.model.get('hidden'));
+  },
+
+  show: function() {
+    this.model.set('hidden', false);
+  },
+
+  hide: function() {
+    this.model.set('hidden', true);
+  },
+
+  close: function() {
+    this.hide();
+    this.trigger('close', this);
+  },
+
+  _onKeyUp: function(e) {
+    if (e.keyCode === 27) {
+      this.close();
+    }
+  }
+
+});
+
+
+'use strict';
+
 var Header = SL.View.extend({
 
   tagName: 'header',
   className: 'Header',
 
-  initialize: function() {
+  events: {
+    'click .js-map': '_onClickMap',
+    'click .js-about': '_onClickAbout',
+    'click .js-privacy': '_onClickPrivacy'
+  },
+
+  initialize: function(options) {
+    this.options = options;
     this.template = this._getTemplate('header');
+    this.router = this.options.router;
   },
 
   render: function() {
@@ -658,8 +859,21 @@ var Header = SL.View.extend({
       title: 'Streetlives NYC',
       url: 'http://beta.streetlives.nyc'
     };
+
     this.$el.append(this.template(options));
     return this;
+  },
+
+  _onClickMap: function() {
+    this.router.navigate('/', { trigger: true });
+  },
+
+  _onClickAbout: function() {
+    this.router.navigate('about', { trigger: true });
+  },
+
+  _onClickPrivacy: function() {
+    this.router.navigate('privacy', { trigger: true });
   }
 
 });
@@ -1189,6 +1403,47 @@ var MapView = SL.View.extend({
     });
   }
 });
+
+'use strict';
+
+var Page = SL.Dialog.extend({
+
+  className: 'Page is-hidden',
+
+  templateName: 'page',
+
+  render: function() {
+    this._super('render', arguments);
+    return this;
+  }
+});
+
+
+'use strict';
+
+var Router = Backbone.Router.extend({
+
+  routes: {
+    "": "map",
+    "/": "map",
+    "about": "about",
+    "privacy": "privacy"
+  },
+
+  map: function() {
+    console.log('map');
+  },
+
+  about: function() {
+    this.trigger('show_about', this);
+  },
+
+  privacy: function() {
+    this.trigger('show_privacy', this);
+  }
+
+});
+
 
 'use strict';
 

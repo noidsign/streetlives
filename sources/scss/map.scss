@@ -2,6 +2,9 @@
   position: absolute;
   width: 100%;
 }
+.Map .cartodb-logo {
+  z-index: 99!Important;
+}
 .Map .cartodb-tiles-loader {
   position: absolute;
   left: auto;

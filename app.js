@@ -19,6 +19,14 @@ App.get('/', function(request, response) {
   response.render('index', { map_id: Config.MAP_ID, username: Config.DB.USER });
 });
 
+App.get('/about', function(request, response) {
+  response.render('index', { map_id: Config.MAP_ID, username: Config.DB.USER });
+});
+
+App.get('/privacy', function(request, response) {
+  response.render('index', { map_id: Config.MAP_ID, username: Config.DB.USER });
+});
+
 App.post('/location', function(request, response) {
   SL.insertLocation(request.body, function(err, data) {
     returnJSON(response, err, data);
