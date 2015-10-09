@@ -11,15 +11,16 @@
   padding: 20px;
   background: #333333;
   color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
 }
 .HeaderTitle {
   flex: 1;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 20px;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
+  font-family: 'Open Sans', sans-serif;
 }
 .HeaderItems {
   flex: 1;
@@ -34,12 +35,34 @@
   outline: none;
   background: none;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
+    animation-name: navBar-hover;
+    animation-duration: .3s;
+    color: #00D5A5;
   }
 }
 .HeaderItem-link.is-selected {
-  color: #2ECC71;
+  border: 1px solid #00D5A5;
+}
+
+@keyframes navBar-hover {
+ 0% {color: #FFFFFF;}
+ 100% {color: #00D5A5;}  
+}
+
+@-webkit-keyframes navBar-hover {
+ 0% {color: #FFFFFF;}
+ 100% {color: #00D5A5;}  
+}
+
+@keyframes btnInfo-hover{
+  0% {background: #00D5A5;}
+  100% {background: #53F9D4;
+  }
 }

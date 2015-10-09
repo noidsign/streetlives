@@ -1,3 +1,4 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -41,48 +42,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  src: local("Lato Light"), local("Lato-Light"), url(https://fonts.gstatic.com/s/lato/v11/IY9HZVvI1cMoAHxvl0w9LVKPGs1ZzpMvnHX-7fPOuAc.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  src: local("Lato Light"), local("Lato-Light"), url(https://fonts.gstatic.com/s/lato/v11/22JRxvfANxSmnAhzbFH8PgLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/8qcEw_nrk_5HEcCpYdJu8BTbgVql8nDJpwnrE27mub0.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/MDadn8DQ_3oT6kvnUq_2r_esZW2xOQ-xsNqO47m55DA.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/rZPI2gHXi8zxUjnybc2ZQFKPGs1ZzpMvnHX-7fPOuAc.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/MgNNr5y1C_tIEuLEmicLmwLUuEpTyoUstqEm5AMlJo4.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
 html,
 body,
 .Map {
@@ -95,18 +54,19 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #222326;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open sans', sans-serif;
   background-color: #f8f8f8;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow: hidden; }
 
 a {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open sans', sans-serif; }
 
 /*# sourceMappingURL=app.css.map */
 
 .Button {
+  font-family: 'Open Sans', sans-serif;
   padding: 10px 16px;
   border: none;
   background: #2ECC71;
@@ -266,15 +226,16 @@ a {
   padding: 20px;
   background: #333333;
   color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   box-sizing: border-box; }
 
 .HeaderTitle {
   flex: 1;
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 20px;
   text-decoration: none;
-  text-transform: uppercase; }
+  text-transform: none;
+  font-family: 'Open Sans', sans-serif; }
 
 .HeaderItems {
   flex: 1;
@@ -289,18 +250,40 @@ a {
   outline: none;
   background: none;
   color: #FFFFFF;
-  font-size: 16px; }
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter; }
   .HeaderItem-link:hover {
-    text-decoration: underline;
-    cursor: pointer; }
+    text-decoration: none;
+    cursor: pointer;
+    animation-name: navBar-hover;
+    animation-duration: .3s;
+    color: #00D5A5; }
 
 .HeaderItem-link.is-selected {
-  color: #2ECC71; }
+  border: 1px solid #00D5A5; }
+
+@keyframes navBar-hover {
+  0% {
+    color: #FFFFFF; }
+  100% {
+    color: #00D5A5; } }
+@-webkit-keyframes navBar-hover {
+  0% {
+    color: #FFFFFF; }
+  100% {
+    color: #00D5A5; } }
+@keyframes btnInfo-hover {
+  0% {
+    background: #00D5A5; }
+  100% {
+    background: #53F9D4; } }
 
 /*# sourceMappingURL=header.css.map */
 
 .InputField {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   width: 100%; }
 
 .Input {
@@ -500,6 +483,19 @@ a {
 
 /*# sourceMappingURL=location.css.map */
 
+.LocationForm-fields {
+  font-family: 'Open Sans', sans-serif; }
+
+.LocationForm-field {
+  margin: 0 0 20px 0; }
+
+.LocationForm-label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ccc; }
+
 .LocationForm {
   position: absolute;
   box-sizing: border-box;
@@ -522,7 +518,7 @@ a {
   box-sizing: border-box; }
 
 .LocationForm-fields {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open sans', sans-serif; }
 
 .LocationForm-field {
   margin: 0 0 20px 0; }
@@ -549,7 +545,7 @@ a {
 /*# sourceMappingURL=location_form.css.map */
 
 .LocationInformation {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open Sans', sans-serif; }
 
 .LocationInformation-title {
   border-bottom: 1px solid #ccc;
@@ -568,7 +564,7 @@ a {
   font-size: 14px; }
 
 .LocationInformation-fields {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Open Sans', sans-serif; }
 
 .LocationInformation-field {
   padding: 0 20px;
@@ -651,10 +647,6 @@ a {
 
 /*# sourceMappingURL=map.css.map */
 
-
-
-/*# sourceMappingURL=paeg.css.map */
-
 .Page {
   position: absolute;
   width: 100%;
@@ -683,7 +675,7 @@ a {
 .Page-content {
   width: 400px;
   height: 200px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open sans', sans-serif;
   font-size: 15px;
   font-weight: 300; }
 
@@ -695,10 +687,11 @@ a {
 /*# sourceMappingURL=page.css.map */
 
 .Popup .leaflet-popup-content-wrapper {
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   background: #FFF;
   color: #333;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   border-radius: 2px;
   padding: 10px;
@@ -712,6 +705,7 @@ a {
   height: 15px; }
 
 .Popup .leaflet-popup-tip-container .leaflet-popup-tip {
+  font-family: 'Open Sans', sans-serif;
   background: #FFF;
   margin: -15px auto 0; }
 
@@ -721,7 +715,9 @@ a {
   font-weight: normal; }
 
 .Popup-addressName {
-  font-weight: bold; }
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  line-height: 30px; }
 
 /*# sourceMappingURL=popup.css.map */
 
@@ -792,48 +788,3 @@ table {
     border: 1px solid transparent; }
 
 /*# sourceMappingURL=search.css.map */
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
-
-body {
-  line-height: 1; }
-
-ol, ul {
-  list-style: none; }
-
-blockquote, q {
-  quotes: none; }
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
-/*# sourceMappingURL=xeset.css.map */
